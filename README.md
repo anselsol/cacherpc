@@ -17,7 +17,7 @@ $ cargo build --release
 ./target/release/rpccache
 ```
 
-#### Configuration
+#### Configuration.
 
 The server supports a number of configuration options, which are the following:
 
