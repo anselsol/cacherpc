@@ -7,7 +7,6 @@ use std::path::PathBuf;
 use std::sync::atomic::{AtomicBool, AtomicU64, AtomicUsize, Ordering};
 use std::sync::Arc;
 use std::env;
-use std::fmt;
 use std::time::Duration;
 use structopt::StructOpt;
 use tracing_subscriber::fmt;
