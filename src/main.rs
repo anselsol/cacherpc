@@ -275,7 +275,7 @@ async fn run(options: cli::Options) -> Result<()> {
     })
     .keep_alive(options.keep_alive)
     .client_request_timeout(Duration::ZERO)
-    .bind(bind_addr)
+    .bind(("127.0.0.1", env::var("PORT").unwrap()))
     .with_context(|| format!("failed to bind to {}", bind_addr))?
     .run()
     .await
