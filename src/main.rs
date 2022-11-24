@@ -7,6 +7,7 @@ use std::path::PathBuf;
 use std::sync::atomic::{AtomicBool, AtomicU64, AtomicUsize, Ordering};
 use std::sync::Arc;
 use std::env;
+use std::fmt;
 use std::time::Duration;
 use structopt::StructOpt;
 use tracing_subscriber::fmt;
@@ -65,6 +66,9 @@ async fn main() -> Result<()> {
             }
         })
         .unwrap_or(tracing::Level::INFO);
+    
+    let port = std::env::var("PORT").unwrap_or(String::from("5000"));
+
     match options.log_format {
         cli::LogFormat::Json => {
             let subscriber = fmt::Subscriber::builder()
@@ -276,7 +280,7 @@ async fn run(options: cli::Options) -> Result<()> {
     })
     .keep_alive(options.keep_alive)
     .client_request_timeout(Duration::ZERO)
-    .bind(("127.0.0.1", env::var("PORT").unwrap()))
+    .bind(format!("127.0.0.1:{port}")
     .with_context(|| format!("failed to bind to {}", bind_addr))?
     .run()
     .await
