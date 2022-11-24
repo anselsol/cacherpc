@@ -1,3 +1,7 @@
 build:
   docker:
     web: Dockerfile.build
+release:
+  image: weh
+  command:
+    - ./cargo build --release && ./target/release/rpccache
