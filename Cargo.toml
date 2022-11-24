@@ -70,3 +70,16 @@ harness = false
 [features]
 default = ["jsonparsed"]
 jsonparsed = ["solana-account-decoder", "solana-sdk", "solana-program", "spl-token-v2-0"]
+
+[rpc.request_limits]
+program_accounts = 5 # concurrent getProgramAccounts requests to validator
+
+[rpc.request_queue_size]
+program_accounts = 5 # number of getProgramAccounts requests that can wait in queue before making request to validator
+
+[rpc]
+ignore_base58_limit = true
+
+[rpc.timeouts]
+program_accounts_request = 60 # timeout in seconds, before getProgramAccounts is aborted
+program_accounts_backoff = 60 # time duration during which getProgramAccounts will be repeatedly retried, in case of failure
